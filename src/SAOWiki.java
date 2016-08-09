@@ -1,4 +1,3 @@
-
 //Project // Folder: SAOWikiFolder
 //Name: Quinatzin Sintora
 //Date: 8/5/2016
@@ -36,7 +35,7 @@ public class SAOWiki extends JFrame implements ActionListener{
 	JButton enterButton = new JButton("I am a Button");							//Used to Enter the Program
 	JLabel headerTitle = new JLabel ("Sword Art Online Wiki");					//Title Label of the Program
 	JButton infoButton = new JButton ("Info");									//Prompts a display Window with information
-	
+	static JFrame secondGUI = new JFrame();										//This creates a second GUI JFrame Window after clicking a button
 	private Point point = new Point();											//Point is used to drag the JFrame with the mouse
 	
 	public SAOWiki(){
@@ -100,11 +99,55 @@ public class SAOWiki extends JFrame implements ActionListener{
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
+		secondGUIDisplay();											//Goes to the second Display Method for the second window
+	}
+	
+	//Layout for the second GUI Window
+	public void secondGUIDisplay(){
+		final JPanel secondPanel = new JPanel(new GridBagLayout()) {
+			@Override
+			public Dimension getPreferredSize(){
+				return new Dimension(300,450);
+			}
+			
+		};
+		
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				setShape(new RoundRectangle2D.Float(secondPanel.getX(), secondPanel.getY(), secondPanel.getWidth(), secondPanel.getHeight(), 10, 10));
+			}
+		});
+		
+		//This is used for the Mouse Listener for to move the main screen
+				secondGUI.addMouseListener(new MouseAdapter() {
+					public void mousePressed(MouseEvent e){
+						point.x = e.getX();
+						point.y = e.getY();
+					}
+				});
+				
+				//This is the Mouse Listener that well help move the JFrame 
+				secondGUI.addMouseMotionListener(new MouseMotionAdapter() {
+					public void mouseDragged(MouseEvent e){
+						Point p = secondGUI.getLocation();
+						secondGUI.setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
+					}
+				});
+		
+		secondGUI.setUndecorated(true);
+		secondGUI.add(secondPanel);
+		secondGUI.setLocationRelativeTo(null);
+		secondGUI.pack();
+		secondGUI.setVisible(true);
 	}
 	public static void main(String[] args) {
 		
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice gd = ge.getDefaultScreenDevice();
+		
+		
+		
 		
 		if (!gd.isWindowTranslucencySupported(PERPIXEL_TRANSPARENT)) {
 	            System.err.println("Shaped windows are not supported");
@@ -119,13 +162,15 @@ public class SAOWiki extends JFrame implements ActionListener{
 	                new SAOWiki();
 	            }
 	        });
+	        
+	       
 	}
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		Object sourceObject =  evt.getSource();
 		
 		if(sourceObject == infoButton){
-			JOptionPane.showMessageDialog(this, "This Application gives information\n SAO Charaters");
+			JOptionPane.showMessageDialog(this, "This Application gives information\n about SAO Charaters");
 		}
 	
 	}
