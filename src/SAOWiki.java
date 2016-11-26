@@ -295,10 +295,14 @@ public class SAOWiki extends JFrame implements ActionListener{
 			//image.setImage(ResourceLoader.getImage("Asuna.png"));
 	}*/
 	}
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		Object sourceObject =  evt.getSource();
 		
+		//Used for the information button to display a popup window 
+		//for the Character of SAW
 		if(sourceObject == infoButton){
 			JOptionPane.showMessageDialog(this, "This Application gives information\n about SAO Charaters");
 		}
