@@ -57,7 +57,7 @@ public class SAOWiki extends JFrame implements ActionListener{
 	ButtonGroup radioButtonGroup = new ButtonGroup();
 	JButton perButton = new JButton("Prev");
 	JButton nextButton = new JButton ("Next");
-	
+	int count = 0;
 	static JFrame secondGUI = new JFrame();										//This creates a second GUI JFrame Window after clicking a button
 	static JFrame charWindow = new JFrame();									//Window for Displaying the Image of the Characters
 	private Point point = new Point();											//Point is used to drag the JFrame with the mouse
@@ -299,8 +299,11 @@ public class SAOWiki extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		Object sourceObject =  evt.getSource();
 		
+		
+		Object sourceObject =  evt.getSource();
+		//imageLabel = new JLabel(saoImageList[count]);
+		imageLabel.setIcon(saoImageList[0]);
 		//Used for the information button to display a popup window 
 		//for the Character of SAW
 		if(sourceObject == infoButton){
@@ -309,13 +312,39 @@ public class SAOWiki extends JFrame implements ActionListener{
 		if(sourceObject == enterButton){
 			secondGUIDisplay();
 			
-			if(sourceObject == nextButton){
-				for(int i = 0; i < saoImageList.length; i++)
-				{
-					imageLabel = new JLabel(saoImageList[i]);
-				}
-			}
 			//secondGUI.setVisible(true);
+		}
+		if(sourceObject == nextButton){
+			
+			
+			if(count < saoImageList.length - 1)
+			{
+			System.out.println(++count);
+			imageLabel.setIcon(saoImageList[count]);
+			
+		
+			}
+			else
+			{
+				count = 0;
+				System.out.println(count);
+			}
+		
+		}
+	
+			
+		if(sourceObject == perButton)
+		{
+			if(count <= 0 )
+			{
+				count = saoImageList.length ;
+				//System.out.println(count);
+			}
+			--count;
+			System.out.println(count);
+			imageLabel.setIcon(saoImageList[count]);
+			
+			
 		}
 		
 	
