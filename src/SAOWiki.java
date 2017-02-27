@@ -24,6 +24,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.RoundRectangle2D;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -37,23 +43,21 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
-//import org.omg.PortableServer.ServantRetentionPolicyValue;
-
+import Char_Docs.ResourceLoaderFolder;
 import SAO_Char.ResourceLoader;
 
 
+
 public class SAOWiki extends JFrame implements ActionListener{
-	JButton enterButton = new JButton("Start");							//Used to Enter the Program
+	JButton enterButton = new JButton("Start");									//Used to Enter the Program
 	JLabel headerTitle = new JLabel ("Sword Art Online Wiki");					//Title Label of the Program
 	JLabel headerSecondScreen = new JLabel("SAO Characters");					//JLabel for second Screen
-//	JRadioButton radioButton = new JRadioButton("Asuna");						//Image for Asuna Season one
-//	JRadioButton radioButton2 = new JRadioButton("Asuna S2");					//image for Asuna Season two
+
 	JRadioButton invisibleRadioButton = new JRadioButton();						//Radio Button that is not seen
 	JButton infoButton = new JButton ("Info");									//Prompts a display Window with information
 	JButton exitButton = new JButton ("Exit");									//Exits the Program
 	JTextArea textArea = new JTextArea(5,15);									//Text Area for Characters
-	//ImageIcon image = new ImageIcon();
-	//JLabel imageLabel = new JLabel(saoImageList);
+
 	ButtonGroup radioButtonGroup = new ButtonGroup();
 	JButton perButton = new JButton("Prev");
 	JButton nextButton = new JButton ("Next");
@@ -200,11 +204,6 @@ public class SAOWiki extends JFrame implements ActionListener{
 		
 		charGUI();
 		invisibleRadioButton.setSelected(true);
-		
-	//	radioButtonGroup.add(radioButton);
-	//	radioButtonGroup.add(radioButton2);
-	//	radioButtonGroup.add(invisibleRadioButton);
-		
 		secondGUI.setLocationRelativeTo(null);								//Set the Location to Null
 		secondGUI.pack();													//Sets Size to certain position
 		secondGUI.setVisible(true);											//sets Visible to true
@@ -249,13 +248,10 @@ public class SAOWiki extends JFrame implements ActionListener{
 		charWindow.setUndecorated(true);
 		charWindow.add(mainPanel);
 		charWindow.setBackground(new Color(0, 0, 0, 0));
-		//charPanel.add(mainPanel);
+
 		mainPanel.setOpaque(false);
 		mainPanel.add(imageLabel);
-		//image = new ImageIcon(saoImageList[0]);
-		//charWindow.setOpacity(true);
-		//mainPanel.add(imageLabel);
-		//charWindow.setSize(50,50);
+
 		charWindow.setResizable(false);
 		charWindow.pack();
 		charWindow.setVisible(true);
@@ -265,9 +261,6 @@ public class SAOWiki extends JFrame implements ActionListener{
 		
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice gd = ge.getDefaultScreenDevice();
-		
-		
-		
 		
 		if (!gd.isWindowTranslucencySupported(PERPIXEL_TRANSPARENT)) {
 	            System.err.println("Shaped windows are not supported");
@@ -285,69 +278,54 @@ public class SAOWiki extends JFrame implements ActionListener{
 	 
 	 
 	       
-	}
-	
-	public void itemStateChanged(ItemEvent action){
-	/*if(radioButton.isSelected()){
-			
-			//ImageIcon image = new ImageIcon(ResourceLoader.getImage("Asuna.png"));
-			image = new ImageIcon(ResourceLoader.getImage("Asuna.png"));
-			//image.setImage(ResourceLoader.getImage("Asuna.png"));
-	}*/
-	}
-	
+	}//end of main
 	
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		
 		
 		Object sourceObject =  evt.getSource();
-		//imageLabel = new JLabel(saoImageList[count]);
 		imageLabel.setIcon(saoImageList[0]);
-		//Used for the information button to display a popup window 
-		//for the Character of SAW
+		
+		//String line = ResourceLoaderFolder.getFile("KiritoDoc.txt");
+		//System.out.println(line);
+		
+		System.out.println(ResourceLoaderFolder.getFile("KiritoDoc.txt"));
+		textArea.setText(ResourceLoaderFolder.getFile("KiritoDoc.txt"));
+		
 		if(sourceObject == infoButton){
-			JOptionPane.showMessageDialog(this, "This Application gives information\n about SAO Charaters");
+			JOptionPane.showMessageDialog(this, "This Application gives information\n about SAO Characters");
 		}
+		
+		//Used to open Character display
 		if(sourceObject == enterButton){
 			secondGUIDisplay();
-			
-			//secondGUI.setVisible(true);
-		}
+			}
+		//Used to move to following Character
 		if(sourceObject == nextButton){
-			
 			
 			if(count < saoImageList.length - 1)
 			{
 			System.out.println(++count);
 			imageLabel.setIcon(saoImageList[count]);
-			
-		
 			}
 			else
 			{
 				count = 0;
 				System.out.println(count);
 			}
-		
 		}
-	
-			
+		
+		//Used to move to previous Characters
 		if(sourceObject == perButton)
 		{
 			if(count <= 0 )
 			{
 				count = saoImageList.length ;
-				//System.out.println(count);
 			}
 			--count;
 			System.out.println(count);
 			imageLabel.setIcon(saoImageList[count]);
-			
-			
+			}
 		}
-		
-	
-	}
-
-}
+	}//end of ActionPerformed
