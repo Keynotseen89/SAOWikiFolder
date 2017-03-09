@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
-
 import javax.swing.border.AbstractBorder;
 
 public class CurvedBorder extends AbstractBorder {
@@ -33,7 +32,7 @@ public class CurvedBorder extends AbstractBorder {
 		
 	}
 	
-	//Overridet the paintBorder to my own liking
+	//Override the paintBorder to my own liking
 	
 	@Override
 	public void paintBorder(Component c, Graphics g, int x, int y, int w, int h){

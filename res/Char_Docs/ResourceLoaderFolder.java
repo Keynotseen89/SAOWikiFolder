@@ -1,11 +1,10 @@
 package Char_Docs;
-import java.awt.Toolkit;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+
 public class ResourceLoaderFolder {
 	
 	static ResourceLoaderFolder rlf = new ResourceLoaderFolder();
@@ -25,19 +24,12 @@ public class ResourceLoaderFolder {
 		  try {
 			while ((line = br.readLine()) != null) 
 			  {
-			
 				sb.append(line + "\n");
-			
-			  }
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		
-			//return rlf.getClass().getResourceAsStream(fileName);
 	}
-		 
 		  return sb.toString();
 	}
-	
-
 }
