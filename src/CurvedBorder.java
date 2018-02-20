@@ -6,9 +6,9 @@ import javax.swing.border.AbstractBorder;
 
 public class CurvedBorder extends AbstractBorder {
 
-	private Color wallColor = Color.gray;									//Sets wallColor to gray 
-	private int sinkLevel = 1;												//Sets Level sink to 1 but can be changed
-	private boolean indent = false;											//Sets indent to be false 
+	private Color wallColor = Color.gray;						//Sets wallColor to gray 
+	private int sinkLevel = 1;							//Sets Level sink to 1 but can be changed
+	private boolean indent = false;							//Sets indent to be false 
 	
 	
 	//Sets the border Curv to wall which is gray
@@ -36,7 +36,7 @@ public class CurvedBorder extends AbstractBorder {
 	
 	@Override
 	public void paintBorder(Component c, Graphics g, int x, int y, int w, int h){
-		super.paintBorder(c, g, x, y, w, h);											//Setting the size and width, height to the border 
+		super.paintBorder(c, g, x, y, w, h);					 //Setting the size and width, height to the border 
 		g.setColor(getWallColor());														//Setting the Color of the Border
 		
 		for (int i = 0; i < sinkLevel; i++){
