@@ -16,4 +16,4 @@
   By clicking the start button you can go through the characters information.
  
 # Screenshot
-  
+![Screenshot](SAOmenu.PNG)![Screenshot](SAOChar.PNG)
